@@ -30,6 +30,7 @@
 ;               14-OCT-2008 Changed object name from ULTIMON to SYNIMON, Paul Higgins, (ARG/TCD)
 ;				09-Jun-2010 Added LIST_INDEX method for searching remote FITS file headers, and fixed PLOTMAN method color table problem, Paul Higgins, (ARG/TCD)
 ;				03-Sep-2012 Made a change to timearrgen since time grid lops off hrs., min., sec. (problem reported by Dan Seaton), Paul Higgins, (ARG/TCD)
+;				09-Sep-2012 Added field to SAT_PROP to test whether to set color table, Paul Higgins, (ARG/TCD)
 ;
 ; Tutorial    : Not yet. For now take a look at the configuration section of 
 ;               http://solarmonitor.org/objects/solmon/ 
@@ -100,7 +101,7 @@ self.sat_prop = ptr_new(/allocate)
 sat_prop={explot:{log:1,grid:1,center:1,colortable:1}, $
 	plot_prop:{log:1,grid:15,center:[0,0],colortable:1}, $
 	fspan:{url:'http://solarmonitor.org',ftype:'*.fts*',path:'/swap/20100101'}, $
-	xstd:1050,ystd:1050,loadct:1}
+	xstd:1050,ystd:1050,loadct:1,docolor:1}
 ;sat_prop={explot:{log:1,grid:1,center:1,colortable:1}, $
 ;	plot_prop:{log:1,grid:15,center:[0,0],colortable:3}, $
 ;	fspan:{url:'http://sohowww.nascom.nasa.gov',ftype:'*.fits',path:'/sdb/hinode/xrt/l1q_synop'}, $
@@ -430,7 +431,12 @@ endif
 
 if data_chk(mapset[0],/type) ne 8 then return 
 
-if not keyword_set(nocolor) then loadct,sat_prop.loadct
+;Check whether to set a color table
+if not keyword_set(nocolor) then begin
+	if (where(strlowcase(tag_names(sat_prop)) eq 'docolor'))[0] ne -1 then begin
+		if sat_prop.docolor ne 0 then loadct,sat_prop.loadct
+	endif else loadct,sat_prop.loadct
+endif
 
 ;--->
 self->set, _EXTRA = _extra;exset
@@ -596,7 +602,10 @@ pro SYNIMON::restoreplot
 sat_prop=*(self.sat_prop)
 ex = sat_prop.explot
 
-loadct,sat_prop.loadct
+;Check whether to set a color table
+if (where(strlowcase(tag_names(sat_prop)) eq 'docolor'))[0] ne -1 then begin
+	if sat_prop.docolor ne 0 then loadct,sat_prop.loadct
+endif else loadct,sat_prop.loadct
 
 plot_prop=*(self.plot_prop)
 plot_prop->set, _EXTRA = sat_prop.plot_prop
@@ -1263,6 +1272,9 @@ endif
 ;2012-09-03 Phiggins edit, problem reported by Dan Seaton. 
 ;TIMEGRID lops off hours, minutes, and seconds
 ;dates = TIME2FILE( TIMEGRID( anyst, anyen, /DAYS, /VMS, /quiet ), /DATE )
+
+;stop
+
 hours = TIME2FILE( TIMEGRID( anyst, anyen, /HOURS, /VMS, /quiet), /DATE)
 dates = hours(uniq(hours))
 

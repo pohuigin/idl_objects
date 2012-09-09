@@ -1,0 +1,37 @@
+<?
+echo '  <style type="text/css">';
+echo '	a.mail2:link { text-decoration : none; color : blue; font-size : 100%; }';
+echo '	a.mail2:visited { text-decoration : none; color: blue; font-size : 100%; }';
+echo '	a.mail2:hover { text-decoration : underline; color: black; font-size : 100%; }';
+echo '    p.p1 {margin: 0.0px 0.0px 16.0px 0.0px; text-align: center; font: 6x Arial}';
+echo '    p.p2 {margin: 0.0px 0.0px 14.0px 0.0px; text-align: center; font: 4x Arial}';
+echo '    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 3x Arial}';
+echo '    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 3x Arial; min-height: 3x}';
+echo '    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 3x Arial}';
+echo '    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 3x Arial; min-height: 3x}';
+echo '    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 4x Arial}';
+echo '    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 3x Arial}';
+echo '    span.s1 {font: 3x Arial}';
+echo '    span.s2 {font: 3x Arial}';
+echo '    span.Apple-tab-span {white-space:pre-wrap}';
+echo '  </style>';
+echo '</head>';
+echo '<body>';
+echo '<table border=0 cellpadding=0 cellspacing=0>';
+echo '<tr>';
+echo '<td width=100% align=left valign=top>';
+echo '<font face=arial size=3>';
+echo '<a class=mail2 href="http://grian.phy.tcd.ie/">Astrophysics Research Group</a>, <a class=mail2 href="http://tcd.ie">Trinity College Dublin</a> <br><br>';
+echo '<a class=mail2 href="http://grian.phy.tcd.ie/solarmonitor/objects/">&larr;&nbsp;More SolarSoft IDL Data Objects';
+echo '</font>';
+echo '</td>';
+echo '<td align=right>';
+echo '<a href="http://grian.phy.tcd.ie/"><img src="http://grian.phy.tcd.ie/solarmonitor/objects/images/arg_logo_small.png" align=right border=0 height=70></a></td><td>&nbsp;&nbsp;&nbsp</td>';
+echo '<td><a href="http://www.tcd.ie/"><img src="http://grian.phy.tcd.ie/solarmonitor/common_files/tcd_crest.png" align=right border=0 height=70></a>';
+echo '</td>';
+echo '</tr>';
+echo '</table>';
+echo '';
+echo '<hr color=#CCCCCC>';
+echo '<br>';
+?>

@@ -43,6 +43,20 @@ if keyword_set(instrument) then begin
 
 ;--<< BEGIN INSTRUMENT DEFINITIONS >>
 
+;--<< HMI PROPERTIES >>
+
+	if instrument eq 'hmi' then begin
+		filter_prop=''
+		
+		sat_prop={explot:{grid:1,center:1,drange:1}, $
+		plot_prop:{grid:15,center:[0,0],drange:[-1000,1000]}, $
+		fspan:{url:'http://www.solarmonitor.org', $
+			ftype:'*_fd_*.fts*', $
+			path:['/data/','insert','/fits/shmi']}, $
+		xstd:4050,ystd:4050,loadct:0,hasfilter:0,unisize:1,arch_type:2}
+	endif
+
+
 ;--<< XRT PROPERTIES >>
 
 	if instrument eq 'xrt' then begin
@@ -205,7 +219,7 @@ if keyword_set(instrument) then begin
 		sat_prop={explot:{dmin:1,dmax:1,grid:1,center:1}, $
 		plot_prop:{dmin:-300,dmax:300,grid:15,center:[0,0]}, $
 		fspan:{url:'', $
-		ftype:['*_','insert','_*0.fits*'],path:smart_paths(/mdi,/no_calib)}, $
+		ftype:['*_','insert','_*0.fits*'],path:'~/idl/solarmonitor'}, $
 		xstd:1100,ystd:1100,loadct:0,hasfilter:1,def_filt:'maglc',unisize:1,arch_type:0}
 	endif
 

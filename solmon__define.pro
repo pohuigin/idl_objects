@@ -622,9 +622,16 @@ fpath=self->alterpath(fpath)
 if sat_prop.arch_type eq 2 then begin
 	filelist=''
 	for i=0,n_elements(fpath)-1 do begin
-		filelist=[filelist,sock_find(fspan.url,ftype,path=fpath[i])]
+		
+	;Chop up the date into YYYY/MM/DD folder path
+		thispath=str_sep(fpath[i],'/')
+		thispath[2]=strmid(thispath[2],0,4)+'/'+strmid(thispath[2],4,2)+'/'+strmid(thispath[2],6,2)
+		thispath=strjoin(thispath,'/')
+		
+		filelist=[filelist,sock_find(fspan.url,ftype,path=thispath)]
 	endfor
 	filelist=self->checkfilerepeat(filelist)
+
 	return,filelist
 endif
 ;--<< >>

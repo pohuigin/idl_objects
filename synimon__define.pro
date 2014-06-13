@@ -568,6 +568,16 @@ pro SYNIMON::latest,filelist,fileslist
 
 self->read,timerange=anytim( strjoin([anytim(systim(/utc),/date,/vms),'23:59:59.999'],' '),/vms )
 
+if self->findnumimgs() eq 0 then begin
+	print,'Searching 1 day prior...'
+	self->read,timerange=anytim( strjoin([anytim(anytim(systim(/utc))-24.*3600.,/date,/vms),'23:59:59.999'],' '),/vms )
+endif
+
+if self->findnumimgs() eq 0 then begin
+	print,'Searching 2 days prior...'
+	self->read,timerange=anytim( strjoin([anytim(anytim(systim(/utc))-24.*3600.*2.,/date,/vms),'23:59:59.999'],' '),/vms )
+endif
+
 return
 
 end

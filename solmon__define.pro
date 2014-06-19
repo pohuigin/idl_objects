@@ -713,7 +713,7 @@ end
 
 PRO solmon__Define
 
-self = {solmon, filter_prop:ptr_new(), INHERITS SYNIMON, INHERITS solmon_config}
+self = {solmon, index:ptr_new(), filter_prop:ptr_new(), INHERITS SYNIMON, INHERITS solmon_config}
 
 END
 
